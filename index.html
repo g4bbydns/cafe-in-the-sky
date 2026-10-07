@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe in the Sky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= CUSTOMER WEBSITE ================= -->
+  <div id="customer-site">
+    <header>
+      <nav class="navbar">
+        <a href="#home" class="logo">Cafe in the Sky</a>
+        <ul class="nav-links">23
+    
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#order">Order</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="#order" id="cart-btn" class="icon-btn" aria-label="Cart"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.5 3.5h2l2.6 11.1a1.8 1.8 0 0 0 1.8 1.4h7.7a1.8 1.8 0 0 0 1.8-1.5L20.5 7H6.1"/><circle cx="9.6" cy="19.6" r="1.5"/><circle cx="17.4" cy="19.6" r="1.5"/></svg><span id="cart-count" class="cart-count">0</span></a>
+          <div class="notif-wrap">
+            <button type="button" id="notif-btn" class="icon-btn" aria-label="Notifications"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 8.5a6 6 0 1 0-12 0c0 5.5-2 6.5-2 6.5h16s-2-1-2-6.5"/><path d="M13.7 18.5a2 2 0 0 1-3.4 0"/></svg><span id="notif-count" class="notif-count hidden">0</span></button>
+            <div id="notif-panel" class="notif-panel hidden">
+              <h4>Notifications</h4>
+              <ul id="notif-list"></ul>
+              <button type="button" id="notif-read-btn" class="btn btn-small">Mark all as read</button>
+            </div>
+          </div>
+          <button type="button" id="user-btn" class="icon-btn hidden" aria-label="Your profile"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.9 19.6a7.4 7.4 0 0 1 14.2 0"/></svg></button>
+          <button id="login-btn" class="btn">Login</button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-content">
+          <h1>Sip Above the Ordinary.</h1>
+          <p>Your cozy little corner in Antipolo for good coffee, good food, and a little time to breathe.</p>
+          <a href="#menu" class="btn">View Menu</a>
+          <a href="#order" class="btn btn-light">Order Now</a>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h2>A Place to Pause</h2>
+        <p class="section-text">Cafe in the Sky is a cozy coffee shop in Antipolo. Come for a good cup of coffee, stay for studying, relaxing, or catching up with friends. Whenever you need to take a break, there is always a seat for you.</p>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Freshly Brewed</h3>
+            <p>Fresh coffee made for every kind of day.</p>
+          </article>
+          <article class="card">
+            <h3>Cozy Space</h3>
+            <p>A comfortable place to study, work, or relax.</p>
+          </article>
+          <article class="card">
+            <h3>Good Food</h3>
+            <p>Pastries and snacks to pair with your favorite drink.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="menu" class="section alt">
+        <h2>Our Menu</h2>
+        <h3>Coffee</h3>
+        <div id="menu-coffee" class="menu-grid"></div>
+        <h3>Non-Coffee</h3>
+        <div id="menu-noncoffee" class="menu-grid"></div>
+        <h3>Pastries</h3>
+        <div id="menu-pastries" class="menu-grid"></div>
+      </section>
+
+      <section id="order" class="section">
+        <h2>Your Order</h2>
+        <div class="order-box">
+          <p id="welcome-text" class="message"></p>
+          <ul id="order-list"></ul>
+          <p id="order-total" class="total">Total: &#8369;0</p>
+          <label for="customer-name">Your Name (optional)</label>
+          <input type="text" id="customer-name" placeholder="Walk-in">
+
+          <label for="order-type">Order Type</label>
+          <select id="order-type">
+            <option value="Pickup">Pickup</option>
+            <option value="Delivery">Delivery</option>
+          </select>
+
+          <div id="delivery-box" class="hidden">
+            <label for="delivery-address">Delivery Address</label>
+            <input type="text" id="delivery-address" placeholder="Street, Barangay, City (same as your profile address)" autocomplete="street-address">
+          </div>
+
+          <label for="payment-method">Payment Method</label>
+          <select id="payment-method"></select>
+          <p id="payment-note" class="message"></p>
+
+          <div id="payment-details" class="hidden">
+            <p id="payment-instructions"></p>
+            <label for="payment-ref">Reference Number</label>
+            <input type="text" id="payment-ref" placeholder="Enter the reference number you used" autocomplete="off">
+          </div>
+
+          <button id="place-order-btn" class="btn">Place Order</button>
+          <p id="order-message" class="message"></p>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2>Contact Us</h2>
+        <div class="contact-wrap">
+          <div class="contact-info">
+            <h3>Cafe in the Sky</h3>
+            <p>123 Hinulugang Taktak Road, Antipolo City, Rizal, Philippines</p>
+            <p>Phone: 0956 856 1069</p>
+            <p>Email: <a href="mailto:cafeinthesky@gmail.com">cafeinthesky@gmail.com</a></p>
+            <p><strong>Opening Hours:</strong><br>Monday&ndash;Sunday<br>10:00 AM &ndash; 2:00 AM</p>
+          </div>
+          <form id="contact-form" class="form-box" novalidate>
+            <label for="contact-name">Full Name</label>
+            <input type="text" id="contact-name" required minlength="2">
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" required>
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" rows="4" required minlength="10"></textarea>
+            <button type="submit" class="btn">Submit</button>
+            <p id="contact-success" class="message"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <h3>Cafe in the Sky</h3>
+      <p>&ldquo;Sip Above the Ordinary.&rdquo;</p>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <p>&copy; 2026 Cafe in the Sky. All Rights Reserved.</p>
+    </footer>
+
+    <!-- ================= CUSTOMIZE BEFORE ADDING TO BASKET ================= -->
+    <div id="custom-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="custom-title">
+      <div class="modal-card">
+        <div class="modal-head">
+          <div>
+            <h3 id="custom-title">Customize</h3>
+            <p id="custom-desc" class="modal-desc"></p>
+          </div>
+          <button type="button" id="custom-close-x" class="modal-x" aria-label="Close customization">&times;</button>
+        </div>
+
+        <div class="modal-media"><img id="custom-image" src="" alt=""></div>
+
+        <div id="custom-options"></div>
+
+        <div class="modal-foot">
+          <div class="qty-stepper">
+            <span class="qty-label">Quantity</span>
+            <button type="button" id="custom-qty-minus" class="btn btn-small" aria-label="Decrease quantity">&minus;</button>
+            <span id="custom-qty-value" class="qty-value">1</span>
+            <button type="button" id="custom-qty-plus" class="btn btn-small" aria-label="Increase quantity">+</button>
+          </div>
+          <div class="modal-foot-actions">
+            <span id="custom-price" class="price"></span>
+            <button type="button" id="custom-cancel" class="btn btn-light">Cancel</button>
+            <button type="button" id="custom-add" class="btn">Add to Basket</button>
+          </div>
+        </div>
+
+        </div>
+    </div>
+
+    <!-- ================= ADD-TO-BASKET TOAST ================= -->
+    <div id="toast-area" class="toast-area" aria-live="polite" aria-atomic="true"></div>
+  </div>
+
+  <!-- ================= LOGIN + REGISTER (ONE page for Admin, Staff, Customer) ================= -->
+  <section id="login-page" class="hidden">
+    <form id="login-form" class="form-box login-box" novalidate>
+      <h2>Login</h2>
+      <label for="username">Username</label>
+      <input type="text" id="username" required autocomplete="off">
+      <label for="password">Password</label>
+      <input type="password" id="password" minlength="8" required autocomplete="off">
+      <button type="submit" class="btn">Login</button>
+      <p id="login-error" class="message error"></p>
+      <p class="switch-line">Don't have an account? <button type="button" class="link-btn" id="show-register-btn">Register</button></p>
+    </form>
+
+    <p id="register-success" class="message reg-success hidden" role="status"></p>
+
+    <form id="register-form" class="form-box login-box hidden" novalidate autocomplete="off">
+      <h2>Register</h2>
+      <label for="reg-name">Full Name</label>
+      <input type="text" id="reg-name" required minlength="2">
+      <label for="reg-username">Username</label>
+      <input type="text" id="reg-username" required minlength="3" autocomplete="off">
+      <label for="reg-password">Password</label>
+      <input type="password" id="reg-password" required minlength="8" autocomplete="new-password">
+      <label for="reg-confirm">Confirm Password</label>
+      <input type="password" id="reg-confirm" required minlength="8" autocomplete="new-password">
+      <label for="reg-address">Address</label>
+      <input type="text" id="reg-address" required minlength="5" placeholder="Street, Barangay, City">
+      <label for="reg-phone">Contact Number</label>
+      <input type="tel" id="reg-phone" required inputmode="numeric" placeholder="09XXXXXXXXX">
+      <label for="reg-email">Email</label>
+      <input type="email" id="reg-email" required placeholder="you@example.com" autocomplete="off">
+      <button type="submit" class="btn">Create Account</button>
+      <p id="register-error" class="message error"></p>
+      <p class="switch-line">Already have an account? <button type="button" class="link-btn" id="show-login-btn">Login</button></p>
+    </form>
+
+    <p class="login-actions">
+      <button type="button" id="back-btn" class="btn btn-light">Back to Website</button>
+    </p>
+  </section>
+
+  <!-- ================= CUSTOMER PROFILE (customers only) ================= -->
+  <section id="account-page" class="hidden">
+    <div class="account-wrap">
+
+      <div class="account-head">
+        <div>
+          <h2>My Account</h2>
+          <p id="account-subtitle" class="section-text"></p>
+        </div>
+        <button type="button" id="account-back-btn" class="btn btn-light">Back to Website</button>
+      </div>
+
+      <div class="account-grid">
+
+        <form id="profile-form" class="form-box" novalidate autocomplete="off">
+          <h3>Profile Details</h3>
+
+          <label>Username</label>
+          <p id="profile-username" class="profile-view"></p>
+
+          <label>Account Type</label>
+          <p id="profile-role" class="profile-view"></p>
+
+          <label for="profile-name">Full Name</label>
+          <input type="text" id="profile-name" required minlength="2" autocomplete="name">
+          <label for="profile-email">Email</label>
+          <input type="email" id="profile-email" autocomplete="email">
+          <label for="profile-phone">Phone Number</label>
+          <input type="tel" id="profile-phone" inputmode="numeric" autocomplete="tel">
+          <label for="profile-address">Address</label>
+          <input type="text" id="profile-address" autocomplete="street-address">
+          <label for="profile-password">Password</label>
+          <input type="password" id="profile-password" minlength="8" placeholder="Leave blank to keep your current password" autocomplete="new-password">
+
+          <p id="profile-error" class="message error"></p>
+          <p id="profile-saved" class="message"></p>
+
+          <div class="form-actions">
+            <button type="submit" class="btn">Save Changes</button>
+            <button type="button" id="profile-cancel-btn" class="btn btn-light">Cancel</button>
+            <button type="button" id="profile-logout-btn" class="btn btn-light">Logout</button>
+          </div>
+        </form>
+
+        <div class="account-orders">
+          <h3>My Orders</h3>
+          <p id="my-orders-empty" class="message hidden">You have not placed any orders yet.</p>
+          <div class="table-wrap">
+            <table class="report-table">
+              <thead>
+                <tr><th>Order ID</th><th>Date</th><th>Items</th><th>Total</th><th>Type</th><th>Payment Method</th><th>Payment Status</th><th>Order Status</th></tr>
+              </thead>
+              <tbody id="my-orders-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DASHBOARD (Staff + Admin) ================= -->
+  <div id="dashboard" class="hidden">
+    <aside class="sidebar">
+      <h2 id="dash-title">Dashboard</h2>
+      <button class="side-btn" data-panel="panel-dashboard">Dashboard</button>
+      <button class="side-btn admin-only" data-panel="panel-users">Registered Users</button>
+      <button class="side-btn" data-panel="panel-orders">Orders</button>
+      <button class="side-btn" data-panel="panel-queue">Queue</button>
+      <button class="side-btn admin-only" data-panel="panel-sales">Sales</button>
+      <button class="side-btn" data-panel="panel-menu">Menu</button>
+      <button class="side-btn" data-panel="panel-inventory">Inventory</button>
+      <button class="side-btn admin-only" data-panel="panel-staff">Staff</button>
+      <button class="side-btn admin-only" data-panel="panel-reports">Reports</button>
+      <button id="logout-btn" class="side-btn">Logout</button>
+    </aside>
+
+    <div class="dash-content">
+
+      <div id="panel-dashboard" class="panel hidden">
+        <h2>Dashboard</h2>
+        <div class="stat-grid">
+          <div class="stat-card"><p>Today's Sales</p><h3 id="stat-sales"></h3></div>
+          <div class="stat-card"><p>Today's Orders</p><h3 id="stat-orders"></h3></div>
+          <div class="stat-card"><p>Products</p><h3 id="stat-products"></h3></div>
+          <div class="stat-card"><p>Low Stock</p><h3 id="stat-low"></h3></div>
+        </div>
+
+        <div class="dashboard-cards">
+          <button type="button" class="dash-card" id="new-registered-card">
+            <span class="dash-card-label">New Registered</span>
+            <span class="dash-card-count" id="new-registered-count">0</span>
+            <span class="dash-card-hint">Click to view Registered Users</span>
+          </button>
+        </div>
+        <h3>Recent Orders</h3>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Order #</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Payment</th></tr>
+            </thead>
+            <tbody id="recent-orders"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-users" class="panel hidden">
+        <h2>Registered Users</h2>
+        <p class="hint">Every account created through the registration system. New sign-ups appear here the moment they are saved.</p>
+
+        <div class="stat-grid">
+          <div class="stat-card"><p>Total Accounts</p><h3 id="users-total">0</h3></div>
+          <div class="stat-card"><p>Customers</p><h3 id="users-customers">0</h3></div>
+          <div class="stat-card"><p>Staff</p><h3 id="users-staff">0</h3></div>
+          <div class="stat-card"><p>Admin</p><h3 id="users-admin">0</h3></div>
+          <div class="stat-card"><p>Inactive</p><h3 id="users-inactive">0</h3></div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Full Name</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Date Registered</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="users-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-orders" class="panel hidden">
+        <h2>Orders</h2>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Order #</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Payment</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="orders-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-sales" class="panel hidden">
+        <h2>Sales</h2>
+        <div class="stat-grid">
+          <div class="stat-card"><p>Gross Sales</p><h3 id="sales-gross"></h3></div>
+          <div class="stat-card"><p>Collected</p><h3 id="sales-paid"></h3></div>
+          <div class="stat-card"><p>Outstanding</p><h3 id="sales-unpaid"></h3></div>
+          <div class="stat-card"><p>Average Order</p><h3 id="sales-average"></h3></div>
+        </div>
+        <h3>Sales by Item</h3>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Item</th><th>Category</th><th>Units Sold</th><th>Revenue</th></tr>
+            </thead>
+            <tbody id="sales-items"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-menu" class="panel hidden">
+        <h2>Menu</h2>
+        <form id="menu-form" class="inline-form" novalidate>
+          <div>
+            <label for="menu-name">Name</label>
+            <input type="text" id="menu-name" required>
+          </div>
+          <div>
+            <label for="menu-category">Category</label>
+            <select id="menu-category">
+              <option>Coffee</option>
+              <option>Non-Coffee</option>
+              <option>Pastries</option>
+            </select>
+          </div>
+          <div>
+            <label for="menu-price">Price</label>
+            <input type="number" id="menu-price" min="1" step="1" inputmode="numeric" required>
+          </div>
+          <div>
+            <label for="menu-desc">Description</label>
+            <input type="text" id="menu-desc" required>
+          </div>
+          <button type="submit" class="btn">Add Item</button>
+        </form>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Name</th><th>Category</th><th>Price</th><th>Availability</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="menu-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-inventory" class="panel hidden">
+        <h2>Inventory</h2>
+        <form id="inventory-form" class="inline-form" novalidate>
+          <div>
+            <label for="inv-name">Item</label>
+            <input type="text" id="inv-name" required>
+          </div>
+          <div>
+            <label for="inv-category">Category</label>
+            <select id="inv-category">
+              <option>Ingredients</option>
+              <option>Packaging</option>
+            </select>
+          </div>
+          <div>
+            <label for="inv-qty">Quantity</label>
+            <input type="number" id="inv-qty" min="1" step="1" inputmode="numeric" required>
+          </div>
+          <div>
+            <label for="inv-unit">Unit</label>
+            <input type="text" id="inv-unit" required>
+          </div>
+          <button type="submit" class="btn">Add Stock</button>
+        </form>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Item</th><th>Category</th><th>Quantity</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="inventory-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-staff" class="panel hidden">
+        <h2>Staff &amp; Accounts</h2>
+        <form id="staff-form" class="inline-form" novalidate>
+          <div>
+            <label for="staff-name">Name</label>
+            <input type="text" id="staff-name" required>
+          </div>
+          <div>
+            <label for="staff-username">Username</label>
+            <input type="text" id="staff-username" required>
+          </div>
+          <div>
+            <label for="staff-password">Password</label>
+            <input type="text" id="staff-password" required>
+          </div>
+          <div>
+            <label for="staff-role">Role</label>
+            <select id="staff-role">
+              <option value="staff">Staff</option>
+              <option value="admin">Admin</option>
+              <option value="customer">Customer</option>
+            </select>
+          </div>
+          <button type="submit" class="btn">Add Account</button>
+        </form>
+        <p id="staff-error" class="message error"></p>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Name</th><th>Username</th><th>Role</th><th>Status</th><th>Contact</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="staff-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-queue" class="panel hidden">
+        <h2>Walk-in Queue</h2>
+        <p class="hint">For customers who walk into the cafe. Online orders stay in Orders and are never added here.</p>
+
+        <div class="stat-grid">
+          <div class="stat-card"><p>Waiting</p><h3 id="queue-waiting">0</h3></div>
+          <div class="stat-card"><p>In Progress</p><h3 id="queue-progress">0</h3></div>
+          <div class="stat-card"><p>Completed</p><h3 id="queue-done">0</h3></div>
+          <div class="stat-card"><p>Next Up</p><h3 id="queue-next">-</h3></div>
+        </div>
+
+        <form id="queue-form" class="inline-form" novalidate>
+          <div>
+            <label for="queue-name">Customer Name</label>
+            <input type="text" id="queue-name" required>
+          </div>
+          <div>
+            <label for="queue-menu">Menu</label>
+            <select id="queue-menu" required>
+              <option value="">-- Select a menu item --</option>
+            </select>
+          </div>
+          <div>
+            <label for="queue-total">Total Amount</label>
+            <input type="number" id="queue-total" min="1" step="1" inputmode="numeric" required readonly>
+            <span id="queue-price-note" class="hint"></span>
+          </div>
+          <div>
+            <label for="queue-payment">Payment Method</label>
+            <select id="queue-payment">
+              <option>Cash</option>
+              <option>GCash</option>
+              <option>Bank Transfer</option>
+            </select>
+          </div>
+          <button type="submit" class="btn">Add Walk-in</button>
+        </form>
+
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Queue #</th><th>Customer</th><th>Items</th><th>Type</th><th>Date</th><th>Time</th><th>Total</th><th>Payment</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="queue-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-reports" class="panel hidden">
+        <h2>Reports</h2>
+        <h3>Order Status Breakdown</h3>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Status</th><th>Orders</th><th>Value</th></tr>
+            </thead>
+            <tbody id="report-status"></tbody>
+          </table>
+        </div>
+        <h3>Best Sellers</h3>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Rank</th><th>Item</th><th>Category</th><th>Units Sold</th><th>Revenue</th></tr>
+            </thead>
+            <tbody id="report-best"></tbody>
+          </table>
+        </div>
+        <h3>Inventory Watch</h3>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr><th>Item</th><th>Category</th><th>Quantity</th><th>Status</th></tr>
+            </thead>
+            <tbody id="report-inventory"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
