@@ -223,6 +223,18 @@ ul { padding: 0; list-style: none; }
 .error { color: var(--terracotta); }
 .hint { font-size: 0.85rem; }
 
+/* Locked state for "Your Order" section when not logged in */
+#order.locked .order-box {
+  opacity: 0.6;
+  pointer-events: none;
+}
+#order.locked .order-box * {
+  pointer-events: none;
+}
+#order.locked .message {
+  color: var(--terracotta);
+}
+
 /* ===== CHECKOUT: ORDER TYPE + PAYMENT ===== */
 #payment-note { font-weight: normal; margin: 8px 0 0; color: var(--green); }
 #payment-details {

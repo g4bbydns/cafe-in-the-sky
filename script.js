@@ -801,9 +801,41 @@ function updateLoginButton() {
   if (currentUser != null && currentUser.role == "customer") userButton.classList.remove("hidden");
   else userButton.classList.add("hidden");
 
+  // Lock/unlock the "Your Order" section based on login state.
+  updateOrderSectionLock();
+
   // Who is signed in decides which notifications are visible.
   renderNotifications();
   updateNotifBadge();
+}
+
+// Locks the "Your Order" section when not logged in as a customer.
+function updateOrderSectionLock() {
+  var isLoggedInCustomer = currentUser != null && currentUser.role == "customer";
+  var orderBox = document.getElementById("order");
+  if (!orderBox) return;
+
+  var interactiveElements = orderBox.querySelectorAll(
+    "input, select, button"
+  );
+
+  var welcome = document.getElementById("welcome-text");
+
+  if (isLoggedInCustomer) {
+    // Unlock: enable all interactive elements
+    for (var i = 0; i < interactiveElements.length; i++) {
+      interactiveElements[i].disabled = false;
+    }
+    orderBox.classList.remove("locked");
+    if (welcome) welcome.textContent = "Welcome, " + currentUser.name + "!";
+  } else {
+    // Lock: disable all interactive elements
+    for (var i = 0; i < interactiveElements.length; i++) {
+      interactiveElements[i].disabled = true;
+    }
+    orderBox.classList.add("locked");
+    if (welcome) welcome.textContent = "Please log in or create an account to access your order.";
+  }
 }
 
 // The login page holds two forms; only one is visible at a time.
